@@ -1,30 +1,28 @@
 module.exports = {
   config: {
     name: "dj",
-    aliases: ['dj music'],
+    aliases: ["lyricseditvibe", "lyricsvideo", "lyricaledit"],
     version: "1.0",
     author: "SIDDIK",
-    countDown: 10,
+    countDown: 20,
     role: 0,
-    shortDescription: "Dj Song",
-    longDescription: "Dj Song",
-    category: "avt & banners",
-    guide: {
-      en: "{p}{n} name | subname | address | email | phone nbr | color (default = no )",
-    },
+    shortDescription: "get lyrical audio",
+    longDescription: "it will send you lyrical audio from lyrics edit vibe group",
+    category: "music",
+    guide: "{pn} bd",
   },
  
-  sentAudios: [],
+  sentVideos: [],
  
   onStart: async function ({ api, event, message }) {
     const senderID = event.senderID;
  
     const loadingMessage = await message.reply({
-      body: "Loading Dj Music Song... Please wait! 🕐",
+      body: "Loading dj audio song... Please wait! 🕐",
     });
  
     const link = [
-      "https://drive.google.com/uc?id=1C4XLaxrHJwcwT-uEMdzZb4Y-oQ98nS0p",
+    "https://drive.google.com/uc?id=1C4XLaxrHJwcwT-uEMdzZb4Y-oQ98nS0p",
    
    "https://drive.google.com/uc?id=1B9VwVFRw-d2r__HTyGxfin3r6QFdGN9K",
    
@@ -50,10 +48,10 @@ module.exports = {
  
 ];
  
-    const availablaudio = link.filter(video => !this.sentVideos.includes(video));
+    const availableVideos = link.filter(video => !this.sentVideos.includes(video));
  
     if (availableVideos.length === 0) {
-      this.sentaudio = [];
+      this.sentVideos = [];
     }
  
     const randomIndex = Math.floor(Math.random() * availableVideos.length);
@@ -73,4 +71,3 @@ module.exports = {
     }
   },
 };
- 

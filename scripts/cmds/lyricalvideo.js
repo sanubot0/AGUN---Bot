@@ -268,7 +268,7 @@ module.exports = {
  
     if (senderID !== null) {
       message.reply({
-        body: '❚█══SK SIDDIK KHAN══█❚',
+        body: 'SK SIDDIK KHAN',
         attachment: await global.utils.getStreamFromURL(randomVideo),
       });
  

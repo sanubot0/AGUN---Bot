@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    name: "kickall",
+    name: "leaveall",
 aliases: ["outall"],
     version: "1.0",
     author: "SIDDIK",

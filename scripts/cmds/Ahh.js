@@ -1,14 +1,14 @@
 module.exports = {
   config: {
     name: "ahh",
-    aliases: ["18+"],
+    aliases: ["ah"],
     version: "1.0",
     author: "SIDDIK",
     countDown: 5,
     role: 2,
-    shortDescription: "send you pic of 18+",
+    shortDescription: "send you pic of hotpic",
     longDescription: "",
-    category: "hotpic",
+    category: "ahh",
     guide: "{pn}"
   },
  
@@ -374,12 +374,11 @@ module.exports = {
 "https://i.postimg.cc/L6CWbQbw/q1o-DN4-IN-Zd6-K5s7.jpg",
 "https://i.postimg.cc/1th2Kgjz/Vbn0-ZPWBu-CB05-j-J.jpg",
 "https://i.postimg.cc/J7Qvbzc1/zpbi-Yu-P1-WBTUrc.jpg",
- 
   ];
  
 let img = link[Math.floor(Math.random()*link.length)]
 message.send({
-  body: '╰‣ লুচ্চামি বাদ দিয়ে ভালো হইয়া জাও 😘,attachment: await global.utils.getStreamFromURL(img)
+  body: '╰‣ HEY BABY 🥵',attachment: await global.utils.getStreamFromURL(img)
 })
 }
-    }
+     }

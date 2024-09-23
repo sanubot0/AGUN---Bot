@@ -12,7 +12,7 @@ module.exports = {
     guide: "{pn} bd",
   },
  
-  sentVideos: [],
+  sentaudio: [],
  
   onStart: async function ({ api, event, message }) {
     const senderID = event.senderID;
@@ -36,21 +36,21 @@ module.exports = {
    
    "https://drive.google.com/uc?id=1CESeRi5Ue4HR6GSDfYJrREGGcsvYJvAB"];
  
-    const availableVideos = link.filter(video => !this.sentVideos.includes(video));
+    const availableAudio = link.filter(audio => !this.sentAudio.includes(audio));
  
-    if (availableVideos.length === 0) {
-      this.sentVideos = [];
+    if (availableAudio.length === 0) {
+      this.sentAudio = [];
     }
  
-    const randomIndex = Math.floor(Math.random() * availableVideos.length);
-    const randomVideo = availableVideos[randomIndex];
+    const randomIndex = Math.floor(Math.random() * availableAudio.length);
+    const randomAudio = availableAudio[randomIndex];
  
-    this.sentVideos.push(randomVideo);
+    this.sentAudio.push(randomAudio);
  
     if (senderID !== null) {
       message.reply({
         body: '╰‣ Islamic Gojol By Sk Siddik',
-        attachment: await global.utils.getStreamFromURL(randomVideo),
+        attachment: await global.utils.getStreamFromURL(randomAudio),
       });
  
       setTimeout(() => {

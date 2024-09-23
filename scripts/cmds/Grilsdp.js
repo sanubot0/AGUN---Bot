@@ -19,7 +19,7 @@ module.exports = {
  
 let img = link[Math.floor(Math.random()*link.length)]
 message.send({
-  body: '「 𝗦𝗞 𝗦𝗜𝗗𝗗𝗜𝗞 𝗞𝗛𝗔𝗡 」',attachment: await global.utils.getStreamFromURL(img)
+  body: '[ 𝐌𝐀𝐃𝐄 𝐁𝐘 𝐒𝐊 𝐒𝐈𝐃𝐃𝐈𝐊 ]',attachment: await global.utils.getStreamFromURL(img)
 })
 }
      }

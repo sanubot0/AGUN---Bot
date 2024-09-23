@@ -1,11 +1,11 @@
 const { loadImage, createCanvas } = require("canvas");
 const axios = require("axios");
 const fs = require("fs-extra");
- 
+
 module.exports = {
   config: {
     name: "pair",
-    aurthor:"SIDDIK",
+    aurthor:"★𝐌𝟗𝐇𝟒𝐌𝐌𝟒𝐃-𝐁𝟒𝐃𝟗𝐋★",
      role: 0,
     shortDescription: " ",
     longDescription: "",
@@ -13,10 +13,10 @@ module.exports = {
     guide: "{pn}"
   },
   onStart: async function ({ api, event, args, usersData, threadsData }) {
-    let pathImg = __dirname + "/tmp/background.png";
-    let pathAvt1 = __dirname + "/tmp/Avtmot.png";
-    let pathAvt2 = __dirname + "/tmp/Avthai.png";
- 
+    let pathImg = __dirname + "/cache/background.png";
+    let pathAvt1 = __dirname + "/cache/Avtmot.png";
+    let pathAvt2 = __dirname + "/cache/Avthai.png";
+
     var id1 = event.senderID;
     var name1 = ""; // Replace with function that retrieves the name of the user
     var ThreadInfo = await api.getThreadInfo(event.threadID);
@@ -49,9 +49,9 @@ module.exports = {
     var cc = ["0", "-1", "99,99", "-99", "-100", "101", "0,01"];
     var rd2 = cc[Math.floor(Math.random() * cc.length)];
     var djtme = [`${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd2}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`];
- 
+
     var tile = djtme[Math.floor(Math.random() * djtme.length)];
- 
+
     var background = [
       "https://i.postimg.cc/wjJ29HRB/background1.png",
       "https://i.postimg.cc/zf4Pnshv/background2.png",
@@ -70,14 +70,14 @@ module.exports = {
       })
     ).data;
     fs.writeFileSync(pathAvt2, Buffer.from(getAvthai, "utf-8"));
- 
+
     let getbackground = (
       await axios.get(`${rd}`, {
         responseType: "arraybuffer",
       })
     ).data;
     fs.writeFileSync(pathImg, Buffer.from(getbackground, "utf-8"));
- 
+
     let baseImage = await loadImage(pathImg);
     let baseAvt1 = await loadImage(pathAvt1);
     let baseAvt2 = await loadImage(pathAvt2);
@@ -107,4 +107,3 @@ module.exports = {
     );
   },
 };
- 

@@ -8,12 +8,12 @@ module.exports = {
     role: 2,
     shortDescription: "send you pic of 18+",
     longDescription: "",
-    category: "noprefix",
+    category: "hotpic",
     guide: "{pn}"
   },
  
   onStart: async function ({ message }) {
-  var link = [
+   var link = [
 "https://i.postimg.cc/wTJNSC1G/E-B9ea-WQAAst-Yg.jpg",
 "https://i.postimg.cc/sgrWyTSD/E-B9eb-AWUAINyt-B.jpg",
 "https://i.postimg.cc/TYcj48LJ/E02i-P-q-XIAE62tu.jpg",

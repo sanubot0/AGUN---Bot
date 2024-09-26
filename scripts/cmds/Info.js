@@ -34,18 +34,18 @@ module.exports = {
  
 		message.reply({
 			body: `  𝐎𝐖𝐍𝐄𝐑-𝐈𝐍𝐅𝐎  \n
-🤖 Bot Name: ${botName}
-🚀 Prefix: ${botPrefix}
-👤 Owner: ${authorName}
-🔆 Age: ${ownAge}
-🍒 authorFb: ${authorFB}
-⏱️ seconds: ${seconds}
-🕰️ minutes: ${minutes}
-🛸 hours: ${hours}
-🌒 days: ${days}
-🌧️ date: ${date}
-☔ Time: ${time}
-⏰ uptime: ${uptimeString}
+❏ Bot Name: ${botName}
+❏ Prefix: ${botPrefix}
+❏ Owner: ${authorName}
+❏ Age: ${ownAge}
+❏ authorFb: ${authorFB}
+❏ seconds: ${seconds}
+❏ minutes: ${minutes}
+❏ hours: ${hours}
+❏ days: ${days}
+❏ date: ${date}
+❏ Time: ${time}
+❏ uptime: ${uptimeString}
  `,
 			attachment: await global.utils.getStreamFromURL(link)
 		});

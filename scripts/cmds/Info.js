@@ -16,10 +16,10 @@ module.exports = {
 	},
 	onStart: async function ({ message }) {
 		const botName = "𝐒𝐊_𝐒𝐈𝐃𝐃𝐈𝐊_⓿❼";
-		const botPrefix = "${botPrefix}";
+		const botPrefix = "/";
 		const authorName = "𝐒𝐊_𝐒𝐈𝐃𝐃𝐈𝐊";
 		const ownAge = "18";
-		const authorFB = "https://www.facebook.com/rxsiddik1";
+		const authorFB = "m.me/rxsiddik1";
 		const urls = JSON.parse(fs.readFileSync('scripts/cmds/Siddik/info.json'));
 		const link = urls[Math.floor(Math.random() * urls.length)];
 		const now = moment().tz('Asia/Jakarta');

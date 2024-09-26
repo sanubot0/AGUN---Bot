@@ -16,7 +16,7 @@ module.exports = {
 	},
 	onStart: async function ({ message }) {
 		const botName = "𝐒𝐊_𝐒𝐈𝐃𝐃𝐈𝐊_⓿❼";
-		const botPrefix = ${botPrefix}
+		const botPrefix = "${botPrefix}";
 		const authorName = "𝐒𝐊_𝐒𝐈𝐃𝐃𝐈𝐊";
 		const ownAge = "18";
 		const authorFB = "https://www.facebook.com/rxsiddik1";

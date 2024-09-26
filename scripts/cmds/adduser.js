@@ -1,18 +1,14 @@
 const { findUid } = global.utils;
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
- 
+
 module.exports = {
 	config: {
 		name: "adduser",
-		version: "1.4",
-		author: "SIDDIK",
+		version: "1.5",
+		author: "NTKhang",
 		countDown: 5,
 		role: 1,
-		shortDescription: {
-			vi: "Thêm thành viên vào box chat",
-			en: "Add user to box chat"
-		},
-		longDescription: {
+		description: {
 			vi: "Thêm thành viên vào box chat của bạn",
 			en: "Add user to box chat of you"
 		},
@@ -21,7 +17,7 @@ module.exports = {
 			en: "   {pn} [link profile | uid]"
 		}
 	},
- 
+
 	langs: {
 		vi: {
 			alreadyInGroup: "Đã có trong nhóm",
@@ -44,11 +40,11 @@ module.exports = {
 			cannotAddUser: "Bot is blocked or this user blocked strangers from adding to the group"
 		}
 	},
- 
+
 	onStart: async function ({ message, api, event, args, threadsData, getLang }) {
 		const { members, adminIDs, approvalMode } = await threadsData.get(event.threadID);
 		const botID = api.getCurrentUserID();
- 
+
 		const success = [
 			{
 				type: "success",
@@ -60,7 +56,7 @@ module.exports = {
 			}
 		];
 		const failed = [];
- 
+
 		function checkErrorAndPush(messageError, item) {
 			item = item.replace(/(?:https?:\/\/)?(?:www\.)?(?:facebook|fb|m\.facebook)\.(?:com|me)/i, '');
 			const findType = failed.find(error => error.type == messageError);
@@ -72,12 +68,12 @@ module.exports = {
 					uids: [item]
 				});
 		}
- 
+
 		const regExMatchFB = /(?:https?:\/\/)?(?:www\.)?(?:facebook|fb|m\.facebook)\.(?:com|me)\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]+)(?:\/)?/i;
 		for (const item of args) {
 			let uid;
 			let continueLoop = false;
- 
+
 			if (isNaN(item) && regExMatchFB.test(item)) {
 				for (let i = 0; i < 10; i++) {
 					try {
@@ -107,10 +103,10 @@ module.exports = {
 				uid = item;
 			else
 				continue;
- 
+
 			if (continueLoop == true)
 				continue;
- 
+
 			if (members.some(m => m.userID == uid && m.inGroup)) {
 				checkErrorAndPush(getLang("alreadyInGroup"), item);
 			}
@@ -127,11 +123,11 @@ module.exports = {
 				}
 			}
 		}
- 
+
 		const lengthUserSuccess = success[0].uids.length;
 		const lengthUserWaitApproval = success[1].uids.length;
 		const lengthUserError = failed.length;
- 
+
 		let msg = "";
 		if (lengthUserSuccess)
 			msg += `${getLang("successAdd", lengthUserSuccess)}\n`;

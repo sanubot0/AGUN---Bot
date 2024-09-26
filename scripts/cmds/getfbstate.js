@@ -1,11 +1,11 @@
 const fs = require("fs-extra");
- 
+
 module.exports = {
 	config: {
 		name: "getfbstate",
 		aliases: ["getstate", "getcookie"],
 		version: "1.2",
-		author: "SIDDIK",
+		author: "NTKhang",
 		countDown: 5,
 		role: 2,
 		description: {
@@ -22,7 +22,7 @@ module.exports = {
 				+ "   {pn} [string|str|s]: get fbstate dạng string\n"
 		}
 	},
- 
+
 	langs: {
 		vi: {
 			success: "Đã gửi fbstate đến bạn, vui lòng kiểm tra tin nhắn riêng của bot"
@@ -31,11 +31,11 @@ module.exports = {
 			success: "Sent fbstate to you, please check bot's private message"
 		}
 	},
- 
+
 	onStart: async function ({ message, api, event, args, getLang }) {
 		let fbstate;
 		let fileName;
- 
+
 		if (["cookie", "cookies", "c"].includes(args[0])) {
 			fbstate = JSON.stringify(api.getAppState().map(e => ({
 				name: e.key,
@@ -51,13 +51,13 @@ module.exports = {
 			fbstate = JSON.stringify(api.getAppState(), null, 2);
 			fileName = "appState.json";
 		}
- 
+
 		const pathSave = `${__dirname}/tmp/${fileName}`;
 		fs.writeFileSync(pathSave, fbstate);
- 
+
 		if (event.senderID != event.threadID)
 			message.reply(getLang("success"));
- 
+
 		api.sendMessage({
 			body: fbstate,
 			attachment: fs.createReadStream(pathSave)

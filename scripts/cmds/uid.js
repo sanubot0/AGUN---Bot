@@ -1,18 +1,14 @@
 const { findUid } = global.utils;
 const regExCheckURL = /^(http|https):\/\/[^ "]+$/;
- 
+
 module.exports = {
 	config: {
 		name: "uid",
-		version: "1.2",
-		author: "SIDDIK",
+		version: "1.3",
+		author: "NTKhang",
 		countDown: 5,
 		role: 0,
-		shortDescription: {
-			vi: "Xem uid",
-			en: "View uid"
-		},
-		longDescription: {
+		description: {
 			vi: "Xem user id facebook của người dùng",
 			en: "View facebook user id of user"
 		},
@@ -28,7 +24,7 @@ module.exports = {
 				+ "\n   Reply to someone's message with the command to view their facebook user id"
 		}
 	},
- 
+
 	langs: {
 		vi: {
 			syntaxError: "Vui lòng tag người muốn xem uid hoặc để trống để xem uid của bản thân"
@@ -37,7 +33,7 @@ module.exports = {
 			syntaxError: "Please tag the person you want to view uid or leave it blank to view your own uid"
 		}
 	},
- 
+
 	onStart: async function ({ message, event, args, getLang }) {
 		if (event.messageReply)
 			return message.reply(event.messageReply.senderID);
@@ -57,7 +53,7 @@ module.exports = {
 			message.reply(msg);
 			return;
 		}
- 
+
 		let msg = "";
 		const { mentions } = event;
 		for (const id in mentions)

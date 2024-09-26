@@ -2,7 +2,7 @@ module.exports = {
 	config: {
 		name: "tid",
 		version: "1.2",
-		author: "SIDDIK",
+		author: "NTKhang",
 		countDown: 5,
 		role: 0,
 		description: {
@@ -14,6 +14,7 @@ module.exports = {
 			en: "{pn}"
 		}
 	},
+
 	onStart: async function ({ message, event }) {
 		message.reply(event.threadID.toString());
 	}

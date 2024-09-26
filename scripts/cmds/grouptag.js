@@ -2,15 +2,11 @@ module.exports = {
 	config: {
 		name: "grouptag",
 		aliases: ["grtag"],
-		version: "1.4",
-		author: "SIDDIK",
+		version: "1.5",
+		author: "NTKhang",
 		countDown: 5,
 		role: 0,
-		shortDescription: {
-			vi: "Tag theo nhóm",
-			en: "Tag by group"
-		},
-		longDescription: {
+		description: {
 			vi: "Tag thành viên theo nhóm",
 			en: "Tag members by group"
 		},
@@ -44,7 +40,7 @@ module.exports = {
 				+ "\n\n   {pn} info <groupTagName>: use to view info of group tag"
 		}
 	},
- 
+
 	langs: {
 		vi: {
 			noGroupTagName: "Vui lòng nhập tên nhóm tag",
@@ -81,13 +77,13 @@ module.exports = {
 			infoGroupTag: "📑 | Group name: %1\n👥 | Number of members: %2\n👨‍👩‍👧‍👦 | List of members:\n %3"
 		}
 	},
- 
+
 	onStart: async function ({ message, event, args, threadsData, getLang }) {
 		const { threadID, mentions } = event;
 		for (const uid in mentions)
 			mentions[uid] = mentions[uid].replace("@", "");
 		const groupTags = await threadsData.get(threadID, "data.groupTags", []);
- 
+
 		switch (args[0]) {
 			case "add": {
 				const mentionsID = Object.keys(event.mentions);
@@ -97,7 +93,7 @@ module.exports = {
 					return message.reply(getLang("noGroupTagName"));
 				if (mentionsID.length === 0)
 					return message.reply(getLang("noMention"));
- 
+
 				const oldGroupTag = groupTags.find(tag => tag.name.toLowerCase() === groupTagName.toLowerCase());
 				if (oldGroupTag) {
 					const usersIDExist = [];
@@ -112,7 +108,7 @@ module.exports = {
 						}
 					}
 					await threadsData.set(threadID, groupTags, "data.groupTags");
- 
+
 					let msg = "";
 					if (usersIDNotExist.length > 0)
 						msg += getLang("addedSuccess", oldGroupTag.name, usersIDNotExist.map(uid => mentions[uid]).join("\n")) + "\n";
@@ -178,7 +174,7 @@ module.exports = {
 					}
 				}
 				await threadsData.set(threadID, groupTags, "data.groupTags");
- 
+
 				let msg = "";
 				if (usersIDNotExist.length > 0)
 					msg += getLang("notExistedInGroupTag", usersIDNotExist.map(uid => mentions[uid]).join("\n"), groupTagName) + "\n";
@@ -243,7 +239,7 @@ module.exports = {
 		}
 	}
 };
- 
+
 function showInfoGroupTag(message, groupTag, getLang) {
 	message.reply(getLang("infoGroupTag", groupTag.name, Object.keys(groupTag.users).length, Object.keys(groupTag.users).map(uid => groupTag.users[uid]).join("\n ")));
 }

@@ -119,7 +119,7 @@ module.exports = {
  
     if (senderID !== null) {
       message.reply({
-        body: '╭•┄「 𝐒𝐊-𝐒𝐈𝐃𝐃𝐈𝐊 」┄•╮',
+        body: '╭•┄「 𝚇 𝙽 𝙸 𝙻 」┄•╮',
         attachment: await global.utils.getStreamFromURL(randomVideo),
       });
  

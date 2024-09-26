@@ -60,7 +60,7 @@ module.exports = {
  
     if (senderID !== null) {
       message.reply({
-        body: '╰‣ 𝐇𝐎𝐓 𝐕𝐈𝐃𝐄𝐎',
+        body: '╰‣ 𝚇 𝙽 𝙸 𝙻',
         attachment: await global.utils.getStreamFromURL(randomVideo),
       });
  

@@ -2,16 +2,16 @@ const axios = require("axios");
 const fs = require("fs-extra");
 const execSync = require("child_process").execSync;
 const dirBootLogTemp = `${__dirname}/tmp/rebootUpdated.txt`;
- 
+
 module.exports = {
 	config: {
 		name: "update",
 		version: "1.5",
-		author: "SIDDIK",
+		author: "Chat GPT, NTKhang",
 		role: 2,
 		description: {
 			en: "Check for and install updates for the chatbot.",
-			vi: ""
+			vi: "Kiểm tra và cài đặt phiên bản mới nhất của chatbot trên GitHub."
 		},
 		category: "owner",
 		guide: {
@@ -19,7 +19,7 @@ module.exports = {
 			vi: "   {pn}"
 		}
 	},
- 
+
 	langs: {
 		vi: {
 			noUpdates: "✅ | Bạn đang sử dụng phiên bản mới nhất của GoatBot V2 (v%1).",
@@ -50,7 +50,7 @@ module.exports = {
 			botWillRestart: "🔄 | The bot will restart now!"
 		}
 	},
- 
+
 	onLoad: async function ({ api }) {
 		if (fs.existsSync(dirBootLogTemp)) {
 			const threadID = fs.readFileSync(dirBootLogTemp, "utf-8");
@@ -58,18 +58,18 @@ module.exports = {
 			api.sendMessage("The chatbot has been restarted.", threadID);
 		}
 	},
- 
+
 	onStart: async function ({ message, getLang, commandName, event }) {
 		// Check for updates
 		const { data: { version } } = await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2/main/package.json");
 		const { data: versions } = await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2/main/versions.json");
- 
+
 		const currentVersion = require("../../package.json").version;
 		if (compareVersion(version, currentVersion) < 1)
 			return message.reply(getLang("noUpdates", currentVersion));
- 
+
 		const newVersions = versions.slice(versions.findIndex(v => v.version == currentVersion) + 1);
- 
+
 		let fileWillUpdate = [...new Set(newVersions.map(v => Object.keys(v.files || {})).flat())]
 			.sort()
 			.filter(f => f?.length);
@@ -77,7 +77,7 @@ module.exports = {
 		fileWillUpdate = fileWillUpdate
 			.slice(0, 10)
 			.map(file => ` - ${file}`).join("\n");
- 
+
 		let fileWillDelete = [...new Set(newVersions.map(v => Object.keys(v.deleteFiles || {}).flat()))]
 			.sort()
 			.filter(f => f?.length);
@@ -85,7 +85,7 @@ module.exports = {
 		fileWillDelete = fileWillDelete
 			.slice(0, 10)
 			.map(file => ` - ${file}`).join("\n");
- 
+
 		// Prompt user to update
 		message.reply(
 			getLang(
@@ -100,7 +100,7 @@ module.exports = {
 			), (err, info) => {
 				if (err)
 					return console.error(err);
- 
+
 				global.GoatBot.onReaction.set(info.messageID, {
 					messageID: info.messageID,
 					threadID: info.threadID,
@@ -109,12 +109,12 @@ module.exports = {
 				});
 			});
 	},
- 
+
 	onReaction: async function ({ message, getLang, Reaction, event, commandName }) {
 		const { userID } = event;
 		if (userID != Reaction.authorID)
 			return;
- 
+
 		const { data: lastCommit } = await axios.get('https://api.github.com/repos/ntkhang03/Goat-Bot-V2/commits/main');
 		const lastCommitDate = new Date(lastCommit.commit.committer.date);
 		// if < 5min then stop update and show message
@@ -125,18 +125,18 @@ module.exports = {
 			const secondsCooldown = Math.floor((5 * 60 * 1000 - (new Date().getTime() - lastCommitDate.getTime())) / 1000 % 60);
 			return message.reply(getLang("updateTooFast", minutes, seconds, minutesCooldown, secondsCooldown));
 		}
- 
+
 		await message.reply(getLang("updateConfirmed"));
 		// Update chatbot
 		execSync("node update", {
 			stdio: "inherit"
 		});
 		fs.writeFileSync(dirBootLogTemp, event.threadID);
- 
+
 		message.reply(getLang("updateComplete"), (err, info) => {
 			if (err)
 				return console.error(err);
- 
+
 			global.GoatBot.onReply.set(info.messageID, {
 				messageID: info.messageID,
 				threadID: info.threadID,
@@ -145,7 +145,7 @@ module.exports = {
 			});
 		});
 	},
- 
+
 	onReply: async function ({ message, getLang, event }) {
 		if (['yes', 'y'].includes(event.body?.toLowerCase())) {
 			await message.reply(getLang("botWillRestart"));
@@ -153,7 +153,7 @@ module.exports = {
 		}
 	}
 };
- 
+
 function compareVersion(version1, version2) {
 	const v1 = version1.split(".");
 	const v2 = version2.split(".");
@@ -165,4 +165,3 @@ function compareVersion(version1, version2) {
 	}
 	return 0;
 }
- 

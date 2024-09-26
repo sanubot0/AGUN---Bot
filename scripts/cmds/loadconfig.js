@@ -1,5 +1,5 @@
 const fs = require("fs-extra");
-
+ 
 module.exports = {
 	config: {
 		name: "loadconfig",
@@ -15,16 +15,14 @@ module.exports = {
 		category: "owner",
 		guide: "{pn}"
 	},
-
 	langs: {
 		vi: {
 			success: "Config đã được load lại thành công"
 		},
 		en: {
-			success: "Config has been reloaded successfully"
+			success: " Sk Siddik Boss Config reloaded successfully"
 		}
 	},
-
 	onStart: async function ({ message, getLang }) {
 		global.GoatBot.config = fs.readJsonSync(global.client.dirConfig);
 		global.GoatBot.configCommands = fs.readJsonSync(global.client.dirConfigCommands);

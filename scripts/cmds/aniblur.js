@@ -1,26 +1,19 @@
-const axios = require("axios");
-const fs = require("fs-extra");
- 
 module.exports = {
   config: {
-    name: "aniblur",
-    aliases: ["animeblur"],
+    name: "Anipic",
+    aliases: ["aniblur"],
     version: "1.0",
-    author: "AceGun",
+    author: "SIDDIK",
     countDown: 5,
     role: 0,
-    shortDescription: "",
-    longDescription: {
-      en: ".",
-    },
-    category: "fun",
-    guide: {
-      en: "{prefix} <animeblur>",
-    },
+    shortDescription: "send you aniblur pic",
+    longDescription: "",
+    category: "user",
+    guide: "{pn}"
   },
  
-  onStart: async function ({ api, event }) {
-    const link = [
+  onStart: async function ({ message }) {
+   var link = [
       "https://i.postimg.cc/QdzSzcM1/image.jpg",
       "https://i.postimg.cc/QCSJJTPB/ros.jpg",
       "https://i.postimg.cc/3xkF2WZR/Cybergot-Cute-anime-pics-Dark-anime-Anime-monochrome.jpg",
@@ -46,23 +39,11 @@ module.exports = {
       "https://i.postimg.cc/mrQXFtb9/Icon.jpg",
       "https://i.postimg.cc/9MbLJKwF/20.jpg",
       "https://i.postimg.cc/v8PP9Rd0/distorted.jpg",
-    ];
+    ]
  
-    const randomIndex = Math.floor(Math.random() * link.length);
-    const imageUrl = link[randomIndex];
-    const filePath = __dirname + `/cache/${randomIndex}.jpg`;
- 
-    const response = await axios.get(imageUrl, { responseType: "stream" });
-    response.data.pipe(fs.createWriteStream(filePath));
-    response.data.on("end", () => {
-      api.sendMessage(
-        {
-          body: "「 Here is your aniblur avatar 🥰 」",
-          attachment: fs.createReadStream(filePath),
-        },
-        event.threadID,
-        () => fs.unlinkSync(filePath)
-      );
-    });
-  },
-};
+let img = link[Math.floor(Math.random()*link.length)]
+message.send({
+  body: '[ 𝐌𝐀𝐃𝐄 𝐁𝐘 𝐒𝐊 𝐒𝐈𝐃𝐃𝐈𝐊 ]',attachment: await global.utils.getStreamFromURL(img)
+})
+}
+ }

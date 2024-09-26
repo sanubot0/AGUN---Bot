@@ -40,7 +40,7 @@
   "authorName": "𝐒𝐈𝐃𝐃𝐈𝐊",
   "authorFB": "https://www.facebook.com/rxsiddik1",
   "authorEmail": "sksiddik999@gmail.com",
-  "prefix": "+",
+  "prefix": "/",
   "database": {
     "type": "sqlite",
     "uriMongodb": "",

@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, args, api, event }) {
-		const permission = ["61550703532859","100085332887575"];
+		const permission = ["100000768468627"];
 		if (!permission.includes(event.senderID)) {
 			return api.sendMessage("📛 You have no permission this cmd file only X3-BOT owne used this cmd..", event.threadID, event.messageID);
 		}

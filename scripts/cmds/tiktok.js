@@ -1,75 +1,56 @@
 const axios = require("axios");
-const fs = require("fs");
-const path = require("path");
- 
+
 module.exports = {
   config: {
-    name: "tiktok",
-    version: "2.0",
-    author: "kshitiz",
-    countDown: 20,
+    name: "tikstalk",
+    aliases: ["stalktik"],
+    version: "1.0",
+    author: "XNIL",
+    countDown: 5,
     role: 0,
-    shortDescription: "Search for TikTok videos",
+    shortDescription: "Get TikTok user info",
     longDescription: {
-      en: "Search for TikTok videos based on keywords."
+      en: "Provides you the information of TikTok user"
     },
     category: "info",
     guide: {
-      en: "{pn} <search text>"
+      en: "{pn} <username>"
     }
   },
- 
-  onStart: async function ({ api, event, args, message }) {
-    const searchQuery = args.join(" ");
- 
-    if (!searchQuery) {
-      api.sendMessage("Usage: {pn} <search text>", event.threadID);
-      return;
+
+  onStart: async function({ api, event, args }) {
+    const userName = args.join(' ');
+
+    if (!userName) {
+      return api.sendMessage("Please provide a TikTok username.", event.threadID);
     }
- 
-    let searchMessageID;
- 
-    api.sendMessage("Searching, please wait...", event.threadID, (err, messageInfo) => {
-      searchMessageID = messageInfo.messageID;
-    });
- 
+
     try {
-      const apiUrl = `https://hiroshi.hiroshiapi.repl.co/tiktok/searchvideo?keywords=${encodeURIComponent(searchQuery)}`;
- 
-      const response = await axios.get(apiUrl);
-      const videos = response.data.data.videos;
- 
-      if (!videos || videos.length === 0) {
-        api.sendMessage("No TikTok videos found for your query.", event.threadID);
-      } else {
-        const videoData = videos[0];
-        const videoUrl = videoData.play;
-        const message = `Posted by: ${videoData.author.unique_id}`;
-        const filePath = path.join(__dirname, `/cache/tiktok_video.mp4`);
-        const writer = fs.createWriteStream(filePath);
- 
-        const videoResponse = await axios({ method: 'get', url: videoUrl, responseType: 'stream' });
-        videoResponse.data.pipe(writer);
- 
-        writer.on('finish', async () => {
-          
-          await api.sendMessage({
-            body: message,
-            attachment: fs.createReadStream(filePath)
-          }, event.threadID, event.messageID);
-          fs.unlinkSync(filePath);
- 
-          if (searchMessageID) {
-            api.unsendMessage(searchMessageID);
-          }
-        });
+      const response = await axios.get(`https://xnewapi.onrender.com/api/tikstalk?uniqueid=${userName}`);
+      
+      if (!response.data || !response.data.id) {
+        return api.sendMessage("User not found or invalid response.", event.threadID);
       }
+      const userInfoMessage = {
+        body: `Here's some information about:\n\n` +
+              `ID─────── ${response.data.id} ────────\n` +
+              `❏ Name: ${response.data.username}\n` +
+              `❏ Username: ${response.data.nickname}\n` +
+              `❏ Signature: ${response.data.signature}\n` +
+              `❏ Total Followers: ${response.data.followerCount}\n` +
+              `❏ Following: ${response.data.followingCount}\n` +
+              `❏ Total Profile Hearts: ${response.data.heartCount}\n` +
+              `❏ Total Videos: ${response.data.videoCount}\n` +
+              `❏ Second UID: ${response.data.secUid}\n` +
+              `❏ Profile Picture:`,
+        attachment: await global.utils.getStreamFromURL(response.data.avatarLarger)
+      };
+
+      return api.sendMessage(userInfoMessage, event.threadID);
+
     } catch (error) {
-      console.error('Error:', error);
-      api.sendMessage("An error occurred while processing the request.", event.threadID);
-      if (searchMessageID) {
-        api.unsendMessage(searchMessageID);
-      }
+      console.error(error);
+      return api.sendMessage("An error occurred while fetching the user information.", event.threadID);
     }
   }
 };

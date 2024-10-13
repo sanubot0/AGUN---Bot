@@ -60,7 +60,7 @@ module.exports = {
 			const categories = {};
 			let msg = "";
 
-			msg += `╔═══════════╗\n  ＸＮＩＬ░Ｂ♢Ｔ \n╚═══════════╝`;
+			msg += `╔═══════════╗\n  𝖲 𝖠 𝖭 𝖸 ░Ｂ♢Ｔ \n╚═══════════╝`;
 
 			for (const [name, value] of commands) {
 				if (value.config.role > 1 && role < value.config.role) continue;
@@ -85,11 +85,11 @@ module.exports = {
 
 			const totalCommands = commands.size;
 			msg += `\n𝗖𝘂𝗿𝗿𝗲𝗻𝘁𝗹𝘆, 𝘁𝗵𝗲 𝗯𝗼𝘁 𝗵𝗮𝘀 ${totalCommands} 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝘀 𝘁𝗵𝗮𝘁 𝗰𝗮𝗻 𝗯𝗲 𝘂𝘀𝗲𝗱\n`;
-			msg += `𝗧𝘆𝗽𝗲 ${prefix}𝗵𝗲𝗹𝗽 [ＸＮＩＬ░Ｂ♢Ｔ] 𝘁𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗱𝗲𝘁𝗮𝗶𝗹𝘀 𝗼𝗳 𝘁𝗵𝗮𝘁 𝗰𝗼𝗺𝗺𝗮𝗻𝗱\n`;
+			msg += `𝗧𝘆𝗽𝗲 ${prefix}𝗵𝗲𝗹𝗽 [𝖲𝖠𝖭𝖴 ░Ｂ♢Ｔ] 𝘁𝗼 𝘃𝗶𝗲𝘄 𝘁𝗵𝗲 𝗱𝗲𝘁𝗮𝗶𝗹𝘀 𝗼𝗳 𝘁𝗵𝗮𝘁 𝗰𝗼𝗺𝗺𝗮𝗻𝗱\n`;
 			msg += `♥ |  `;
 
 			const helpListImages = [
-				"https://i.imgur.com/GiN47ra.jpeg" // add image link here 
+				"https://i.imgur.com/Z21NiI2.jpeg" // add image link here 
 			];
 
 			const helpListImage = helpListImages[Math.floor(Math.random() * helpListImages.length)];

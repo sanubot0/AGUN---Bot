@@ -40,7 +40,7 @@
   "nickNameBot": "😚😚𝘽𝘼𝘽𝙐🐱😘",
   "prefix": "/",
   "database": {
-    "type": "mongodb",
+    "type": "sqlite",
     "uriMongodb": "mongodb+srv://xnil6x143:HaogAjelhhZehn5i@cluster0.htr4b.mongodb.net/xnil?retryWrites=true&w=majority&appName=Cluster0",
     "autoSyncWhenStart": true,
     "autoRefreshThreadInfoFirstTime": true,
